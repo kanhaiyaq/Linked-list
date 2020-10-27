@@ -1,0 +1,57 @@
+#include<iostream>
+using namespace std;
+struct Node{
+	int data;
+	Node *next;
+};
+void push(struct Node** href,int new_data)
+{
+	struct Node* new_node=(struct Node*)malloc(sizeof(struct Node));
+	new_node->data=new_data;
+	new_node->next=(*href);
+	(*href)=new_node;
+}
+void deletenode(struct Node** href,int key)
+{
+	struct Node* temp=*href,*prev;
+	if(temp!=NULL&&temp->data==key)
+	{
+		*href=temp->next;
+		free(temp);
+		return ;
+		
+	}
+	while(temp!=NULL&&temp->data!=key)
+	{
+		prev=temp;
+		temp=temp->next;
+	}
+	if(temp==NULL)
+	{
+	return;	
+	}
+	prev->next=temp->next;
+	free(temp);
+}
+void print(struct Node *node)
+{
+	while(node!=NULL)
+	{
+		cout<<"\n"<<node->data;
+	     node=node->next;
+	}
+}
+int main()
+{
+	struct Node* head=NULL;
+	push(&head,8);
+    push(&head,7);
+	push(&head,6);
+	push(&head,8);
+	//print(head);
+	deletenode(&head,8);
+   
+	print(head);
+	
+		
+}
