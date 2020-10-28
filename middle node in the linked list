@@ -1,0 +1,50 @@
+#include<iostream>
+using namespace std;
+struct Node
+{
+	int data;
+	Node *next;
+	
+};
+
+void push(struct Node** head_href,int new_data)
+{
+	struct Node* new_node=new Node();
+	new_node->data=new_data;
+	new_node->next=(*head_href);
+	(*head_href)=new_node;
+}
+void printmiddle(struct Node *head)
+{
+	struct Node* slowptr=head;
+	struct Node* fastptr=head;
+	if(head!=NULL)
+	{
+		while(fastptr!=NULL&&fastptr->next!=NULL)
+		{
+			fastptr=fastptr->next->next;
+			slowptr=slowptr->next;
+		}
+		cout<<"middle node is ["<<slowptr->data<<"] \n\n";
+	}
+}
+void printlist(struct Node *ptr)
+{
+	while(ptr!=NULL)
+	{
+		cout<<ptr->data<<"->";
+		ptr=ptr->next;
+	}
+	cout<<"NULL\n";
+}
+int main()
+{
+	struct Node* head=NULL;
+	for(int i=6;i>0;i--)
+	{
+		push(&head,i);
+		printlist(head);
+		printmiddle(head);
+	}
+	return 0;
+}
