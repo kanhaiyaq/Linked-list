@@ -1,0 +1,40 @@
+#include<iostream>
+using namespace std;
+struct Node
+{
+	int data;
+	Node *next;
+};
+void push(struct Node** head_href,int new_data)
+{
+	struct Node* new_node= new Node();
+	new_node->data=new_data;
+	new_node->next=(*head_href);
+	(*head_href)=new_node;
+}
+int count(struct Node* head,int search)
+{
+	struct Node *current=head;
+	int countr=0;
+	while(current!=NULL)
+	{
+		if(current->data==search)
+		{
+			countr++;
+		}
+		current=current->next;
+	}
+	return countr;
+	
+}
+int main()
+{
+	Node *head=NULL;
+	push(&head,6);
+	push(&head,6);
+	push(&head,6);
+	push(&head,1);
+	
+	
+	cout<<count(head,6);
+}
